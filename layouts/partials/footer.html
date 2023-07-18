@@ -2,7 +2,7 @@
     {{if or (.Site.Params.footer.trademark) (.Site.Params.footer.author) (.Site.Params.footer.copyright) (.Site.Params.footer.rss) (.Site.Params.footer.topText) (.Site.Params.footer.KvK) }}
     <div class="footer__inner">
         <div class="footer__content">
-            {{ if .Site.Params.footer.trademark }}<span>&copy; {{ now.Format "2006" }}</span>{{ end }}
+            {{ if .Site.Params.footer.trademark }}<span>&copy; {{ .Site.Params.footer.trademark }}</span>{{ end }}
             {{ if .Site.Params.footer.author }}<span><a href="{{ .Site.BaseURL }}">{{ .Site.Author.name }}</a></span>{{ end }}
             {{ if .Site.Params.footer.KvK }}<span><a href="https://www.kvk.nl/bestellen/#/85556785000051595737">KVK 85556785</a></span>{{ end }}
             {{ if .Site.Params.footer.copyright }}<span>{{ .Site.Copyright| safeHTML }}</span>{{ end }}
