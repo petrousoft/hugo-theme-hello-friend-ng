@@ -1,3 +1,23 @@
 {{ range . -}}
+    {{ if eq .name "email" }}
+    {{/* Email obfuscation for spam bot prevention */}}
+    &nbsp; <a href="#" {{if eq .nonewpage 0}} target="_blank" {{end}} rel="me noopener {{ .rel }}" title="Email"
+        data-email-user="{{ (index (split .url "@") 0) }}"
+        data-email-domain="{{ (index (split .url "@") 1) }}">
+        {{ partial "svg.html" . }} {{/* This renders the email SVG icon */}}
+        <script>
+            (function() {
+                var link = document.currentScript.parentNode;
+                var user = link.getAttribute('data-email-user');
+                var domain = link.getAttribute('data-email-domain');
+                if (user && domain) {
+                    link.setAttribute('href', 'mailto:' + user + '@' + domain);
+                }
+            })();
+        </script>
+    </a> &nbsp;
+    {{ else }}
+    {{/* Standard rendering for all other social links */}}
     &nbsp; <a href="{{ .url }}" {{if eq .nonewpage 0}} target="_blank" {{end}} rel="me noopener {{ .rel }}" title="{{ .name | humanize }}">{{ partial "svg.html" . }}</a> &nbsp;
+    {{ end }}
 {{- end -}}
